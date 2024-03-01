@@ -5,6 +5,7 @@ const teamSchema = mongoose.Schema(
         teamName: {
             type: String,
             required: true,
+            unique: true
         },
         ladderID: {
             type: Number,
@@ -27,3 +28,5 @@ const teamSchema = mongoose.Schema(
 );
 
 export const Team = mongoose.model('team', teamSchema);
+
+
