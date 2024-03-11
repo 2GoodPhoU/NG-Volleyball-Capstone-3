@@ -3,8 +3,11 @@ import { PORT } from "./config.js";
 import mongoose from "mongoose";
 import { Team } from "./models/teamModel.js";
 import teamRoute from './routes/teamRoute.js';
+import challengesRoute from './routes/challengesRoute.js';
+import matchRoute from './routes/matchRoute.js';
+import ladderRoute from './routes/ladderRoute.js';
 import cors from 'cors';
-import {mongoDBURL} from './secret.js'; 
+import {mongoDBURL} from './secret.js';
 
 
 const app = express();
@@ -28,11 +31,14 @@ app.use(
 
 app.get('/', (request, response) => {
     console.log(request)
-    return response.status(234).send('Welcome');
+    return response.status(234).send('Welcome to our application');
 });
 
 //Middle ware
 app.use('/teams',teamRoute);
+app.use('/challenges',challengesRoute)
+app.use('/matches',matchRoute)
+app.use('/ladders',ladderRoute)
 
 
 
