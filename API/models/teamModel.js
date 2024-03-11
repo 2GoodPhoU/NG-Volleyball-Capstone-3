@@ -9,6 +9,7 @@ const teamSchema = mongoose.Schema(
         ladderID: {
             type: Number,
             required: true,
+            
         },
         captainUsername: {
             type: String,

@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import { Team } from "./models/teamModel.js";
 import teamRoute from './routes/teamRoute.js';
 import cors from 'cors';
-import {mongoDBURL} from './secret.js';
+import {mongoDBURL} from './secret.js'; 
 
 
 const app = express();
