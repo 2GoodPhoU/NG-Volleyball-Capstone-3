@@ -48,25 +48,38 @@ app.post("/signup", async (req, res) => {
 });
 
 // Login user 
+// Login user 
 app.post("/login", async (req, res) => {
     try {
-        const check = await collection.findOne({ name: req.body.username });
+        const { username, password } = req.body;
+
+        // Check if the request is for guest login
+        if (username === 'guest' && password === 'guestpassword') {
+            // Render the home page or perform any other action for the guest user
+            return res.render("home");
+        }
+
+        // For regular user login, proceed with checking credentials in the database
+        const check = await collection.findOne({ name: username });
         if (!check) {
-            res.send("User name cannot found")
+            return res.send("User not found");
         }
+
         // Compare the hashed password from the database with the plaintext password
-        const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
+        const isPasswordMatch = await bcrypt.compare(password, check.password);
         if (!isPasswordMatch) {
-            res.send("wrong Password");
+            return res.send("Incorrect password");
         }
-        else {
-            res.render("home");
-        }
+
+        // Redirect or render the home page upon successful login
+        res.render("home");
     }
-    catch {
-        res.send("wrong Details");
+    catch (error) {
+        console.error(error);
+        res.send("An error occurred");
     }
 });
+
 
 
 // Define Port for Application

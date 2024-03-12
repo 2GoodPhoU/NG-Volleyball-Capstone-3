@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const connect = mongoose.connect('mongodb+srv://s:root@volleyball-ladder.irscfsh.mongodb.net/?retryWrites=true&w=majority&appName=Volleyball-Ladder');
+const mongoDBURL = 'mongodb+srv://dongjinli:root@volleyball-ladder.irscfsh.mongodb.net/?retryWrites=true&w=majority&appName=Volleyball-Ladder'
+const connect = mongoose.connect(mongoDBURL);
 
 // Check database connected or not
 connect.then(() => {
