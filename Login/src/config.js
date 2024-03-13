@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoDBURL = 'mongodb+srv://dongjinli:root@volleyball-ladder.irscfsh.mongodb.net/?retryWrites=true&w=majority&appName=Volleyball-Ladder'
+const mongoDBURL = './secret.js'
 const connect = mongoose.connect(mongoDBURL);
 
 // Check database connected or not
