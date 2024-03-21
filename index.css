@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.orange-sidebar-text {
+    font-size: 24px; /* Adjust the font size as needed */
+    display: block; /* Display buttons as block elements */
+    margin-bottom: 15px; /* Add some bottom margin between buttons */
+    border: 2px solid lightblue; /* Add an outline with 2px width and lightblue color */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    padding: 10px 20px; /* Optional: Add padding for better visual appearance */
+    text-decoration: none; /* Optional: Remove underline */
+    color: rgb(252, 121, 34); /* Optional: Set text color */
+    width:200px;
+  }
+  .orange-sidebar-text:hover{
+    background-color: white;
+    color:rgb(2, 179, 255)
+  }
+ 
+
+  .Profile-page-bar {
+    margin-bottom: 20px;
+  }
+
+
+  
+
+  .Profile-image{
+  width: 400px;
+  height: 350px; 
+  position: absolute;
+  top: 20%;
+  left: 50% ;
+
+  }
+
+  .Profile-info{
+    padding: 10px;
+    text-align: center;
+    top: calc(20% + 350px + 20px);
+    position: relative ;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  
+
+  
