@@ -11,6 +11,10 @@ const ladderSchema = new Schema ({
     ladderManager: {
         type: String,
         required: true
+    },
+    ladderName: {
+        type: String,
+        required: true
     }
 
 });

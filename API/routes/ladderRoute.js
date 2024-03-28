@@ -1,13 +1,14 @@
 import express from 'express'
 import {Ladder} from '../models/ladderModel.js'
+import { Team } from '../models/teamModel.js';
 
 const router = express.Router();
 // Route to create (POST) a new ladder
 router.post('/', async(req,res) => {
-    const {ladderID,ladderManager} = req.body
+    const {ladderID,ladderManager,ladderName} = req.body
     try {
         const ladders = await Ladder.create({
-            ladderID,ladderManager
+            ladderID,ladderManager,ladderName
         }) 
         res.status(200).json(ladders)
     }
@@ -20,7 +21,11 @@ router.post('/', async(req,res) => {
 router.get ('/', async(req,res) => {
     try {
         const ladders = await Ladder.find({}).sort({createdAt:-1})
-        res.status(200).json(ladders)
+        
+        return res.status(200).json({
+            count: ladders.length,
+            data: ladders
+        });
     }
     catch (error) {
         res.status(500).json({error: error.message})
@@ -52,7 +57,7 @@ router.delete('/:id', async(req,res) => {
 });
 
 //Update a ladder "ladderManager"
-router.put('/:id', async(req,res) => {
+router.put('/:id/manager', async(req,res) => {
     try {
         if(
             !req.body.ladderManager
@@ -72,5 +77,46 @@ router.put('/:id', async(req,res) => {
         res.status(500).json({message: error.message})
     }
 });
+
+router.put('/:id/name', async(req,res) => {
+    try {
+        if(
+            !req.body.ladderName
+        ) {
+            return res.status(400).send ({
+                message: 'Send all required field: ladderName',
+            });
+        }  
+        const {id} = req.params;
+        const ladders = await Ladder.findByIdAndUpdate(id, req.body);
+        if (!ladders) {
+            return res.status(404).json({message: 'ladder not found'})
+        }
+        return res.status(200).json(ladders)
+    }
+    catch (error) {
+        res.status(500).json({message: error.message})
+    }
+});
+
+
+router.get('/:ladderID/teams', async (request, response) => {
+    try {
+        const { ladderID } = request.params;
+        
+        const teams = await Team.find({ ladderID });
+
+        //return response.status(200).json(teams);
+
+        return response.status(200).json({
+            count: teams.length,
+            data: teams
+        });
+    } catch (error) {
+        console.error(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
 
 export default router;
